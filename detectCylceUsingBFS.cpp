@@ -1,41 +1,61 @@
 #include<iostream>
+#include<map>
 #include<list>
+#include<queue>
+#include<stack>
 using namespace std;
+template<typename T>
 class Graph{
-	int n;
-	list<int> *edge;
+	map<T,list<T> > edge;
 	public:
-		Graph(int nodes){
-			n = nodes;
-			edge = new list<int>[nodes];
+		Graph(){
+			
 		}
-		void addEdge(int u ,int v,bool isDirected = true){
+		void addEdge(T u,T v ,bool isbiDirection = false){
 			edge[u].push_back(v);
-			if(isDirected){
+			if(isbiDirection){
 				edge[v].push_back(u);
 			}
 		}
-		
-		void printGraph(){
-		
-			for(int i=0;i<n;i++){
-			    cout<<i<<"->";
-			    for(auto a:edge[i]){
-			    	cout<<a<<"->";
-				}		
-				cout<<endl;
-			}
-		}
-		~Graph(){
-			delete edge;
-		}
 	
+		bool isCylce(T src){
+		    queue<T> q;
+		    map<T,bool> visited;
+		    map<T,T> parent;
+		    q.push(src);
+		    visited[src] = 1;
+		    parent[src] = src;
+		    while(!q.empty()){
+		        T front = q.front();
+		       
+		        q.pop();
+		        for(auto a:edge[front]){
+		            if(visited[a]==1 and parent[front]!=a){
+		                return true;
+		            }else if(visited[a]!=1){
+		                q.push(a);
+		                parent[a]=front;
+		                visited[a]=1;
+		                
+		            }
+		        }
+		    }
+		    return false;
+		}
+		
+		~Graph(){
+	
+		}
 };
 int main(){
-	Graph graph1(3);
-	graph1.addEdge(0,1);
-	graph1.addEdge(1,2);
-	graph1.addEdge(2,1);
-	graph1.printGraph();
+	Graph<int> g;
+    g.addEdge(0, 1); 
+    g.addEdge(1, 2); 
+    g.addEdge(2, 2); 
+   
+  
+	
+
+	cout<<g.isCylce(2);
 	return 0;
 }
