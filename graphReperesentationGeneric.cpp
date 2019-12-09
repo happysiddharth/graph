@@ -9,7 +9,7 @@ class Graph{
 	map<T,list<T> > edge;
 	public:
 		Graph(){
-			
+
 		}
 		void addEdge(T u,T v ,bool isbiDirection = false){
 			edge[u].push_back(v);
@@ -43,47 +43,46 @@ class Graph{
 		        }
 		    }
 		}
-		
-	
+
+
 		void dfs(T src){
 		   stack<T> stk;
 		   stk.push(src);
-		   
+
 		   map<T,bool> visited;
-		   
+
 		   while(!stk.empty()){
 		       T top = stk.top();
 		       stk.pop();
-		       
+
 		       if(!visited[top]){
 		           cout<<top<<"->";
 		           visited[top]=true;
 		       }
-		       
+
 		       for(auto a:edge[top]){
 		           if(!visited[a]){
 		               stk.push(a);
 		           }
 		       }
-		       
+
 		   }
 		}
-		
+
 		~Graph(){
-	
+
 		}
 };
 int main(){
-	Graph<int> g;
-    g.addEdge(0, 1); 
-    g.addEdge(0, 2); 
-    g.addEdge(1, 2); 
-    g.addEdge(2, 0); 
-    g.addEdge(2, 3); 
-    g.addEdge(3, 3); 
-  
-	
+	Graph<string> g;
+    g.addEdge("siddhart","ravi");
+    g.addEdge("ravi", "swapnil");
+    g.addEdge("bhrat", "siddhart");
 
-	g.dfs(2);
+
+
+
+
+	g.printGraph();
 	return 0;
 }
