@@ -1,32 +1,33 @@
 #include<iostream>
 using namespace std;
 #define v 4
-//find minimun distance vertex
+//find minimum distance vertex
 int minDistanceVertex(int distance[],bool visited[]){
- int min = INT_MAX, min_index=0; 
+ int min = INT_MAX, min_index=0;
 
-    for (int i = 0; i < v; i++) 
-        if (visited[i] == false && distance[i] <= min) 
-            min = distance[v], min_index = i; 
-  
-    return min_index; 
+    for (int i = 0; i < v; i++)
+        if (visited[i] == false && distance[i] <= min)
+            min = distance[v], min_index = i;
+
+    return min_index;
 }
 //print the graph
 
 void printGraph(int distance[]){
-	 printf("Vertex \t\t Distance from Source\n"); 
-    for (int i = 0; i < v; i++) 
-        printf("%d \t\t %d\n", i, distance[i]); 
+	 printf("Vertex \t\t Distance from Source\n");
+    for (int i = 0; i < v; i++)
+        printf("%d \t\t %d\n", i, distance[i]);
 }
 
 void dijkstraAlgo(int graph[v][v],int src){
 	bool visited[v];
 	int distance[v];
-	for (int i = 0; i < v; i++) 
-        distance[i] = INT_MAX, visited[i] = false;
+	for (int i = 0; i < v; i++)
+        distance[i] = INT_MAX,
+        visited[i] = false;
 
 	distance[src]=0;
-	
+
 	for(int i=0;i<(v)-1;i++){
 		int u = minDistanceVertex(distance,visited);
 		visited[u]=true;
@@ -38,18 +39,18 @@ void dijkstraAlgo(int graph[v][v],int src){
 
 	}
 	printGraph(distance);
-	
-	
+
+
 }
 
 
-int main() 
-{ 
-    
-    int graph[v][v] = { {0,5,-6,1},{5,0,5,1},{-6,5,0,1}}; 
-  
-    dijkstraAlgo(graph, 0); 
- 
+int main()
+{
 
-    return 0; 
-} 
+    int graph[v][v] = { {0,5,-6,1},{5,0,5,1},{-6,5,0,1}};
+
+    dijkstraAlgo(graph, 0);
+
+
+    return 0;
+}
